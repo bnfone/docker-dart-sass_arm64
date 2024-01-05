@@ -18,6 +18,12 @@ Sass is watching for changes. Press Ctrl-C to stop.
 In our project main folder we can then run some other image to server our web. For example the https://hub.docker.com/r/jekyll/jekyll/.
 
 # Building
+
+```sh
+docker build -t dart-sass:arm64 . --no-cache --platform linux/arm64
+```
+
+
 This image is based on debian:buster-slim.
 
 Command run by the image:
