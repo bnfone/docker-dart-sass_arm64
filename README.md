@@ -1,9 +1,11 @@
-sass/dart-sass docker image for web development purposes. Runs sass --watch on provided volumes.
+## docker-dart-sass_arm64
+
+sass/dart-sass docker image for web development purposes on **arm64 architecture** *(like Apple Silicon)*. Runs sass --watch on provided volumes.
 
 # How to use this image
 To use this image in web development run this docker command:
 ```
-docker run -v $PWD/sass:/sass/ -v $PWD/css:/css/ -it michalklempa/dart-sass:latest
+docker run -v $PWD/sass:/sass/ -v $PWD/css:/css/ -it bnfone/docker-dart-sass:latest
 ```
 Assuming we have ./sass folder with source files and ./css folder with desired generated CSS files.
 
@@ -22,4 +24,10 @@ Command run by the image:
 ```
 /opt/dart-sass/sass --watch /sass:/css
 ```
+
+---
+
+### Credits
+
+Credit to [Michal Klempa](https://github.com/michalklempa) for his [docker-dart-sass](https://github.com/michalklempa/docker-dart-sass) Repo.
 
