@@ -1,9 +1,12 @@
 ARG UPSTREAM_VERSION=1.69.7
 
+# automatic use of arm64 image
 FROM debian:bullseye-slim as build
 ARG UPSTREAM_VERSION
-ADD https://github.com/sass/dart-sass/releases/download/${UPSTREAM_VERSION}/dart-sass-${UPSTREAM_VERSION}-linux-x64.tar.gz /opt/
-RUN tar -C /opt/ -xzvf /opt/dart-sass-${UPSTREAM_VERSION}-linux-x64.tar.gz
+
+# download arm64 image of sass
+ADD https://github.com/sass/dart-sass/releases/download/${UPSTREAM_VERSION}/dart-sass-${UPSTREAM_VERSION}-linux-arm64.tar.gz /opt/
+RUN tar -C /opt/ -xzvf /opt/dart-sass-${UPSTREAM_VERSION}-linux-arm64.tar.gz
 
 FROM debian:bullseye-slim as final
 ARG BRANCH
@@ -26,11 +29,13 @@ LABEL org.label-schema.schema-version="1.0" \
     org.label-schema.vcs-branch=$BRANCH \
     org.label-schema.vcs-ref=$COMMIT
 
+# download arm64 image of tini
 ENV TINI_VERSION v0.19.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-arm64 /tini
 RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]
 
 COPY --from=build /opt/dart-sass /opt/dart-sass
 
 CMD [ "/opt/dart-sass/sass", "--watch", "/sass:/css" ]
+
