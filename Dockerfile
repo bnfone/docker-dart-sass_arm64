@@ -1,4 +1,4 @@
-ARG UPSTREAM_VERSION=1.69.7
+ARG UPSTREAM_VERSION=1.71.1
 
 # automatic use of arm64 image
 FROM debian:bullseye-slim as build
